@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secrete id Game</title>
+    <style>
+        .abc{
+            margin: 10px;
+            padding: 5%;
+            background-color: aqua;
+            border-color: black;
+            border-width: 2cap;
+        }
+    </style>
+</head>
+<body>
+    <head><h1>Secrete Operation Game :</h1></head>
+    <div>
+        <div class="abc">
+            <p>
+                <%= content %>
+            </p>
+
+        </div>
+        <form type="submit" action="submit" method="post">
+            <label>Id :</label>
+            <input name="id" type="text" >
+            <label>secret :</label>
+            <input name="secret" type="text">
+            <label>Score Number :</label>
+            <input name="score" type="text">
+        
+
+            <label>Route :</label>
+            <input id="get" type="submit" value="GET" formaction="/get-secret">
+            <input id="post" type="submit" value="POST" formaction="/post-secret">
+            <input id="put" type="submit" value="PUT" formaction="/put-secret">
+            <input id="patch" type="submit" value="PATCH" formaction="/patch-secret">
+            <input id="delete" type="submit" value="DELETE" formaction="/delete-secret">
+
+
+        </form>
+    </div>
+</body>
+</html>
