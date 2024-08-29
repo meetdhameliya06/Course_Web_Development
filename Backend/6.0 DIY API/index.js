@@ -29,8 +29,26 @@ app.get("/filter",(req,res)=>{
 
 //4. POST a new joke
 
-//5. PUT a joke
+app.post("/jokes",(req,res)=>{
+  const NewJoke = {id:jokes.length+1,
+  jokeText : req.body.text ,
+  jokeType : req.body.type }
+  jokes.push(NewJoke);
+  console.log(jokes.slice(-1));
+  res.json(NewJoke)
+})
 
+//5. PUT a joke
+app.put("/jokes/:id",(req,res)=>{
+  const id = parseInt(req.params.id);
+  const NewJoke = {id: id,
+    jokeText : req.body.text ,
+    jokeType : req.body.type }
+
+    const findjoke = jokes.find((joke)=> jokes.id === id );
+    jokes [findjoke] = NewJoke ;
+    res.json(NewJoke)
+})
 //6. PATCH a joke
 
 //7. DELETE Specific joke
