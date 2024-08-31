@@ -45,15 +45,62 @@ app.put("/jokes/:id",(req,res)=>{
     jokeText : req.body.text ,
     jokeType : req.body.type }
 
-    const findjoke = jokes.find((joke)=> jokes.id === id );
+    const findjoke = jokes.findIndex((joke)=> jokes.id === id );
     jokes [findjoke] = NewJoke ;
     res.json(NewJoke)
 })
 //6. PATCH a joke
+app.patch("/jokes/:id",(req,res)=>{
+  const id = parseInt(req.params.id)
+  const currentjoke = jokes.find((joke)=> joke.id === id)
+
+const replacementJoke = {
+  id : id,
+  jokeText : req.body.text || currentjoke.jokeText,
+  jokeType : req.body.type || currentjoke.jokeType,
+}
+const searchIndex = jokes.findIndex((joke)=> joke.id === id)
+jokes[searchIndex] = replacementJoke;
+console.log(jokes[searchIndex])
+res.json(replacementJoke)
+
+})
 
 //7. DELETE Specific joke
+app.delete("/jokes/:id",(req,res)=>{
+  const id = parseInt(req.params.id)
+  const searchIndex = jokes.findIndex((joke)=> joke.id === id);
+
+  if (searchIndex > -1) {
+    jokes.splice(searchIndex,1);
+    res.sendStatus(200)
+  } else {
+    res.
+    status(404)
+    .json(`joke id can't find with id ${id}.`);
+
+
+    
+  }
+})
+
 
 //8. DELETE All jokes
+
+
+app.delete("/all",(req,res)=>{
+  const userkey = req.query.key ;
+  if (userkey === masterKey) {
+  jokes = []
+  res.sendStatus(200);   
+  } else {
+    res
+    .status(404)
+    .json({error : `You are not authorised. `})
+    
+    
+  }
+})
 
 app.listen(port, () => {
   console.log(`Successfully started server on port ${port}.`);
