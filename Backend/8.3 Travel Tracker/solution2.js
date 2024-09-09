@@ -8,8 +8,8 @@ const port = 3000;
 const db = new pg.Client({
   user: "postgres",
   host: "localhost",
-  database: "world",
-  password: "123456",
+  database: "World",
+  password: "meet",
   port: 5432,
 });
 db.connect();
@@ -49,6 +49,7 @@ app.post("/add", async (req, res) => {
     await db.query("INSERT INTO visited_countries (country_code) VALUES ($1)", [
       countryCode,
     ]);
+    console.log(countryCode)
     res.redirect("/");
   }
 });
